@@ -1,16 +1,27 @@
-# bamgoo 文档
+<script setup>
+import { onMounted } from 'vue'
 
-bamgoo 当前文档站按以下四层组织：
+onMounted(() => {
+  const supported = new Set(['zh', 'en'])
 
-- 指南：框架介绍、设计想法、来源、架构与仓库结构。
-- 核心：运行时与基础能力。
-- 模块：每个业务模块的介绍与使用。
-- 驱动：每个驱动的配置、示例代码与适用场景。
+  const detectLang = () => {
+    const navLangs = Array.isArray(navigator.languages) ? navigator.languages : []
+    const first = (navLangs[0] || navigator.language || '').toLowerCase()
+    if (first.startsWith('zh')) return 'zh'
+    if (first.startsWith('en')) return 'en'
+    return 'en'
+  }
 
-## 目录入口
+  const target = detectLang()
+  const to = `/${supported.has(target) ? target : 'en'}/`
 
-- [指南](/guide/)
-- [核心](/core/)
-- [模块](/modules/)
-- [驱动](/drivers/)
-- [示例](/examples/)
+  if (window.location.pathname !== to) {
+    window.location.replace(to)
+  }
+})
+</script>
+
+# Redirecting...
+
+- [中文首页](/zh/)
+- [English Home](/en/)

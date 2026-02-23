@@ -1,0 +1,32 @@
+/* Language switcher normalization:
+   keep only English + Chinese locale entries and force order:
+   English first, Chinese second.
+*/
+
+.VPNavBarTranslations .VPMenu .VPMenuLink,
+.VPNavBarExtra .group.translations .VPMenuLink {
+  display: none;
+}
+
+.VPNavBarTranslations .VPMenu .VPMenuLink:has(a[href^="/en"]),
+.VPNavBarExtra .group.translations .VPMenuLink:has(a[href^="/en"]),
+.VPNavBarTranslations .VPMenu .VPMenuLink:has(a[href^="/zh"]),
+.VPNavBarExtra .group.translations .VPMenuLink:has(a[href^="/zh"]) {
+  display: block;
+}
+
+.VPNavBarTranslations .VPMenu .VPMenuLink:has(a[href^="/en"]),
+.VPNavBarExtra .group.translations .VPMenuLink:has(a[href^="/en"]) {
+  order: 1;
+}
+
+.VPNavBarTranslations .VPMenu .VPMenuLink:has(a[href^="/zh"]),
+.VPNavBarExtra .group.translations .VPMenuLink:has(a[href^="/zh"]) {
+  order: 2;
+}
+
+.VPNavBarTranslations .VPMenu .items,
+.VPNavBarExtra .group.translations {
+  display: flex;
+  flex-direction: column;
+}
