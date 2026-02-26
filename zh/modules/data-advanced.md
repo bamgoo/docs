@@ -4,18 +4,17 @@ outline: deep
 
 # data 高级用法
 
-## Page + withCount
+## Slice（total + items）
 
 ```go
-page := db.Table("user").Page(0, 20, base.Map{
+total, items := db.Table("user").Slice(0, 20, base.Map{
   "status": "active",
-  "$withCount": true,
 })
 if db.Error() != nil {
   // handle
 }
-_ = page.Total
-_ = page.Items
+_ = total
+_ = items
 ```
 
 ## Raw / Exec

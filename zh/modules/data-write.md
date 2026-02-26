@@ -56,3 +56,11 @@ if db.Error() != nil {
   // handle
 }
 ```
+
+也可以用快捷函数：
+
+```go
+if err := data.Migrate("user", "order"); err != nil {
+  // handle
+}
+```

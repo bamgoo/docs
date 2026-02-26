@@ -9,7 +9,7 @@ Supported groups:
 - logic: `$and $or $nor $not`
 - text: `$like $ilike $regex`
 - json/array: `$contains $overlap $elemMatch`
-- options: `$select $sort $limit $offset $after $withCount`
+- options: `$select $sort $limit $offset $after`
 - aggregate: `$group $agg $having`
 - join: `$join`
 
@@ -35,6 +35,19 @@ rows2 := db.Table("article").Query(Map{
 _ = rows2
 ```
 
+JSON field sort also supports a unified syntax (driver-specific compilation underneath):
+
+```go
+rows3 := db.Table("article").Query(Map{
+  "$sort": Map{"count.views": DESC},
+})
+_ = rows3
+```
+
+Resolution order:
+- If `count` is a join/base alias, it is parsed as `alias.field`.
+- Otherwise, if `count` is a JSON field, it is parsed as JSON path sort.
+
 ```go
 rows := db.View("order").Query(Map{
   "$join": []Map{{
@@ -46,5 +59,14 @@ rows := db.View("order").Query(Map{
 if db.Error() != nil {
   // handle
 }
+_ = rows
+```
+
+## JSON Path Query
+
+```go
+rows := db.Table("article").Query(Map{
+  "metadata.name": "xxxx",
+})
 _ = rows
 ```

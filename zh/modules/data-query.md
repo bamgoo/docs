@@ -10,7 +10,7 @@ outline: deep
 - 逻辑：`$and $or $nor $not`
 - 文本：`$like $ilike $regex`
 - JSON/数组：`$contains $overlap $elemMatch`
-- 选项：`$select $sort $limit $offset $after $withCount`
+- 选项：`$select $sort $limit $offset $after`
 - 聚合：`$group $agg $having`
 - 关联：`$join`
 
@@ -36,6 +36,19 @@ rows2 := db.Table("article").Query(base.Map{
 _ = rows2
 ```
 
+JSON 字段排序也支持统一写法（驱动内部适配）：
+
+```go
+rows3 := db.Table("article").Query(base.Map{
+  "$sort": base.Map{"count.views": base.DESC},
+})
+_ = rows3
+```
+
+解析规则：
+- 若 `count` 是 join/base 别名，按 `alias.field` 解析。
+- 否则若 `count` 是 JSON 字段，按 JSON path 排序解析。
+
 ## 示例
 
 ```go
@@ -53,5 +66,14 @@ rows := db.View("order").Query(base.Map{
 if db.Error() != nil {
   // handle
 }
+_ = rows
+```
+
+## JSON 路径查询
+
+```go
+rows := db.Table("article").Query(base.Map{
+  "metadata.name": "xxxx",
+})
 _ = rows
 ```

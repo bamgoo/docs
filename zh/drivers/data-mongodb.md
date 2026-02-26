@@ -32,6 +32,14 @@ database = "app"
   - `localField + foreignField`
   - `on` 表达式（lookup pipeline）
 - 支持 Raw/Exec 的 Mongo 命令模式
+- 支持标准化原生命令 API（`data_mongodb.Command/FindRaw/AggregateRaw`）
+
+## errorMode
+
+```toml
+[data.setting]
+errorMode = "auto-clear" # or sticky
+```
 
 ## Raw 示例
 
@@ -39,6 +47,19 @@ database = "app"
 rows := db.Raw("aggregate orders", []base.Map{
   {"$match": base.Map{"status": "paid"}},
   {"$group": base.Map{"_id": "$user_id", "total": base.Map{"$sum": "$amount"}}},
+})
+if db.Error() != nil {
+  // handle
+}
+_ = rows
+```
+
+## 标准化 Raw API 示例
+
+```go
+rows := data_mongodb.FindRaw(db, "users", base.Map{"status": "active"}, base.Map{
+  "sort": base.Map{"id": base.DESC},
+  "limit": 20,
 })
 if db.Error() != nil {
   // handle

@@ -21,3 +21,20 @@ if db.Error() != nil {
   // handle
 }
 ```
+
+## Migration
+
+```go
+db.Migrate("user", "order")
+if db.Error() != nil {
+  // handle
+}
+```
+
+or convenience helper:
+
+```go
+if err := data.Migrate("user", "order"); err != nil {
+  // handle
+}
+```

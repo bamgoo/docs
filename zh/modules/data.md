@@ -11,7 +11,7 @@ outline: deep
 - API 改为结果直返，不直接返回 `error`
 - 统一通过 `db.Error()` 获取最后错误
 - 新增 `db.Parse(...)`（驱动级解析）
-- 支持 `Page + $withCount`
+- 支持 `Slice`（直接返回 total + items）
 - 支持事务 `Tx`
 - 支持迁移 `Migrate`
 - 支持缓存（按表维度失效）
@@ -37,8 +37,7 @@ if db.Error() != nil {
   // handle
 }
 
-page := db.Table("user").Page(0, 20, base.Map{
-  "$withCount": true,
+total, items := db.Table("user").Slice(0, 20, base.Map{
   "$sort": base.Map{"id": base.DESC},
 })
 if db.Error() != nil {
@@ -46,7 +45,8 @@ if db.Error() != nil {
 }
 
 _ = users
-_ = page
+_ = total
+_ = items
 ```
 
 ## Parse
@@ -62,6 +62,11 @@ if db.Error() != nil {
 _ = where
 _ = params
 ```
+
+## 字段命名映射（可选）
+
+默认关闭。开启后会做 `camelCase <-> snake_case` 映射。  
+详细说明见：[字段命名映射](/zh/modules/data-field-mapping)
 
 ## 事务
 
@@ -82,6 +87,9 @@ _ = db.Tx(func(tx data.DataBase) error {
 - [查询 DSL](/zh/modules/data-query)
 - [写入 DSL](/zh/modules/data-write)
 - [高级用法](/zh/modules/data-advanced)
+- [字段命名映射](/zh/modules/data-field-mapping)
+- [接口迁移指南](/zh/modules/data-migration)
+- [结构迁移（Migrate）](/zh/modules/data-schema-migration)
 - 驱动：
   - [data-postgresql](/zh/drivers/data-postgresql)
   - [data-mysql](/zh/drivers/data-mysql)
