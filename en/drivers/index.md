@@ -8,6 +8,7 @@ Categories:
 - cache: file, redis
 - bus/event/queue: nats, redis
 - cron: pgsql, redis
+- data: postgresql, mysql, sqlite, mongodb
 - log: file, greptime
 - mutex: redis
 - storage: minio, s3
