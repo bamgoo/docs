@@ -10,6 +10,7 @@ Supported groups:
 - text: `$like $ilike $regex`
 - json/array: `$contains $overlap $elemMatch`
 - options: `$select $sort $limit $offset $after`
+- scan: `$batch` (batched scanning)
 - aggregate: `$group $agg $having`
 - join: `$join`
 
@@ -69,4 +70,16 @@ rows := db.Table("article").Query(Map{
   "metadata.name": "xxxx",
 })
 _ = rows
+```
+
+## Batched Scan
+
+```go
+res := db.Table("article").Scan(func(row Map) Res {
+  return bamgoo.OK
+}, Map{
+  "status": "active",
+  "$batch": 500,
+})
+_ = res
 ```

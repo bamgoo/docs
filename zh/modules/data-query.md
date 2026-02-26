@@ -11,6 +11,7 @@ outline: deep
 - 文本：`$like $ilike $regex`
 - JSON/数组：`$contains $overlap $elemMatch`
 - 选项：`$select $sort $limit $offset $after`
+- 扫描：`$batch`（分批扫描）
 - 聚合：`$group $agg $having`
 - 关联：`$join`
 
@@ -76,4 +77,16 @@ rows := db.Table("article").Query(base.Map{
   "metadata.name": "xxxx",
 })
 _ = rows
+```
+
+## Scan 分批
+
+```go
+res := db.Table("article").Scan(func(row base.Map) base.Res {
+  return bamgoo.OK
+}, base.Map{
+  "status": "active",
+  "$batch": 500,
+})
+_ = res
 ```

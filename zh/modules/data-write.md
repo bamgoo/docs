@@ -38,7 +38,7 @@ _ = newItem
 ## 批量
 
 ```go
-items := db.Table("user").CreateMany([]base.Map{
+items := db.Table("user").InsertMany([]base.Map{
   {"name": "u1"},
   {"name": "u2"},
 })

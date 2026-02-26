@@ -37,7 +37,7 @@ When enabled, mapping is applied to:
 
 - `Migrate` (table/column/index)
 - `Query / First / Count / Aggregate / Group`
-- `Create / Upsert / Update / Delete`
+- `Insert / Upsert / Update / Delete`
 - `Slice / Scan / ScanN`
 
 ## Example
@@ -59,7 +59,7 @@ defer db.Close()
 db.Migrate("user")
 if db.Error() != nil { return }
 
-_ = db.Table("user").Create(base.Map{
+_ = db.Table("user").Insert(base.Map{
   "id":         1,
   "userId":     1001,
   "loginTimes": 1,

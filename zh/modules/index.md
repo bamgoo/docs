@@ -11,7 +11,7 @@ bamgoo 以模块化组织能力，每个模块都通过 `bamgoo.Mount(module)` �
 1. 先看 [bamgoo 核心模块](/zh/modules/bamgoo)
 2. 再看基础模块：`config / log / cache / mutex`
 3. 再看通信模块：`bus / event / queue`
-4. 再看调度与数据与 Web：`cron / data / http / web / view / storage`
+4. 再看调度、搜索、数据与 Web：`cron / search / data / http / web / view / storage`
 
 ## 模块分类
 
@@ -20,6 +20,7 @@ bamgoo 以模块化组织能力，每个模块都通过 `bamgoo.Mount(module)` �
 - 日志与状态：`log` `cache` `mutex`
 - 通信：`bus` `event` `queue`
 - 调度：`cron`
+- 搜索：`search`
 - 数据：`data`
 - 接口与站点：`http` `web` `view`
 - 文件：`storage`

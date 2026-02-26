@@ -11,6 +11,10 @@ outline: deep
 - operations return results directly (no direct `error` return)
 - use `db.Error()` to read last error
 - `db.Parse(...)` does driver-level query parsing
+- supports data mutation watcher (`data.watcher`)
+- supports `WithContext/WithTimeout` for unified timeout/cancel
+- supports pool settings (`maxOpen/maxIdle/maxLifetime/maxIdleTime`)
+- supports pool observability via `data.GetPoolStats()`
 
 ## Example
 
@@ -31,6 +35,42 @@ if db.Error() != nil {
 _ = users
 _ = total
 _ = items
+```
+
+## Timeout And Cancel
+
+```go
+ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+defer cancel()
+
+db := data.Base().WithContext(ctx).WithTimeout(1500 * time.Millisecond)
+defer db.Close()
+
+rows := db.Table("user").Query(Map{"status": "active"})
+if db.Error() != nil {
+  // timeout/cancel/error
+}
+_ = rows
+```
+
+## Pool And Cache Capacity
+
+```toml
+[data.main]
+driver = "postgresql"
+url = "postgres://..."
+maxOpen = 50
+maxIdle = 20
+maxLifetime = "30m"
+maxIdleTime = "5m"
+
+[data.main.setting]
+cache = { enable = true, ttl = "10s", capacity = 5000 }
+```
+
+```go
+pools := data.GetPoolStats("main")
+_ = pools
 ```
 
 ## Field Name Mapping (Optional)

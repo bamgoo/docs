@@ -15,6 +15,10 @@ outline: deep
 - 支持事务 `Tx`
 - 支持迁移 `Migrate`
 - 支持缓存（按表维度失效）
+- 支持数据变更 Watcher（`data.watcher`）
+- 支持 `WithContext/WithTimeout`（统一超时与取消）
+- 支持连接池配置（`maxOpen/maxIdle/maxLifetime/maxIdleTime`）
+- 支持连接池观测（`data.GetPoolStats()`）
 
 ## 安装
 
@@ -47,6 +51,42 @@ if db.Error() != nil {
 _ = users
 _ = total
 _ = items
+```
+
+## 超时与取消
+
+```go
+ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+defer cancel()
+
+db := data.Base().WithContext(ctx).WithTimeout(1500 * time.Millisecond)
+defer db.Close()
+
+rows := db.Table("user").Query(base.Map{"status": "active"})
+if db.Error() != nil {
+  // handle timeout/cancel/error
+}
+_ = rows
+```
+
+## 连接池与缓存容量
+
+```toml
+[data.main]
+driver = "postgresql"
+url = "postgres://..."
+maxOpen = 50
+maxIdle = 20
+maxLifetime = "30m"
+maxIdleTime = "5m"
+
+[data.main.setting]
+cache = { enable = true, ttl = "10s", capacity = 5000 }
+```
+
+```go
+pools := data.GetPoolStats("main")
+_ = pools
 ```
 
 ## Parse
