@@ -39,7 +39,7 @@ if db.Error() != nil {
 
 page := db.Table("user").Page(0, 20, base.Map{
   "$withCount": true,
-  "$sort": base.Map{"id": -1},
+  "$sort": base.Map{"id": base.DESC},
 })
 if db.Error() != nil {
   // handle

@@ -13,6 +13,28 @@ Supported groups:
 - aggregate: `$group $agg $having`
 - join: `$join`
 
+## `$sort` (single field vs multi-field)
+
+- Single-field sort: use `Map`
+- Multi-field sort: use `[]Map` to keep deterministic order
+
+```go
+// single field
+rows1 := db.Table("article").Query(Map{
+  "$sort": Map{"id": DESC},
+})
+_ = rows1
+
+// multi-field (ordered)
+rows2 := db.Table("article").Query(Map{
+  "$sort": []Map{
+    {"id": ASC},
+    {"views": DESC},
+  },
+})
+_ = rows2
+```
+
 ```go
 rows := db.View("order").Query(Map{
   "$join": []Map{{
