@@ -111,6 +111,7 @@ Migration strategy and concurrent index build (Config-level):
 [data]
 
 [data.migrate]
+startup = "off" # off / check / auto / role (default off)
 mode = "safe" # safe / strict / danger
 concurrentIndex = true # PostgreSQL: CREATE INDEX CONCURRENTLY
 timeout = "5m"
@@ -123,6 +124,23 @@ jitter = "250ms"
 - `safe`: non-destructive changes only (create table/add column/add index)
 - `strict`: report destructive drift (does not execute)
 - `danger`: allows destructive changes (drop extra columns/indexes)
+- `startup=off`: skip startup auto-migrate (default)
+- `startup=check`: startup schema-diff check only, fail on drift
+- `startup=auto`: run `Migrate` automatically at startup
+- `startup=role`: resolve by `BAMGOO_ROLE`
+  - `BAMGOO_ROLE=migrator|migration|migrate|schema|schema-migrator` -> `auto`
+  - `BAMGOO_ROLE=app|api|worker|web` -> `check`
+  - empty/others -> `off`
+
+Example (single config, multi-role runtime):
+
+```bash
+# app nodes: check-only
+export BAMGOO_ROLE=app
+
+# migration job: auto migrate
+export BAMGOO_ROLE=migrator
+```
 
 Multi-node startup protection:
 - distributed migrate lock (avoid migration collision across nodes)

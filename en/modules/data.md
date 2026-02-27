@@ -11,10 +11,12 @@ outline: deep
 - operations return results directly (no direct `error` return)
 - use `db.Error()` to read last error
 - `db.Parse(...)` does driver-level query parsing
+- supports read-only transaction via `TxReadOnly`
 - supports data mutation watcher (`data.watcher`)
 - supports `WithContext/WithTimeout` for unified timeout/cancel
 - supports pool settings (`maxOpen/maxIdle/maxLifetime/maxIdleTime`)
 - supports pool observability via `data.GetPoolStats()`
+- Query DSL parse compile cache for repeated query args
 
 ## Example
 
@@ -53,6 +55,15 @@ if db.Error() != nil {
 _ = rows
 ```
 
+## Read-only Transaction
+
+```go
+_ = db.TxReadOnly(func(tx data.DataBase) error {
+  _ = tx.Table("user").Query(Map{"status": "active"})
+  return tx.Error()
+})
+```
+
 ## Pool And Cache Capacity
 
 ```toml
@@ -84,6 +95,7 @@ See details: [field name mapping](/en/modules/data-field-mapping)
 - [query DSL](/en/modules/data-query)
 - [write DSL](/en/modules/data-write)
 - [advanced](/en/modules/data-advanced)
+- [naming semantics](/en/modules/data-naming)
 - [field name mapping](/en/modules/data-field-mapping)
 - [API migration guide](/en/modules/data-migration)
 - [schema migration (Migrate)](/en/modules/data-schema-migration)

@@ -111,6 +111,7 @@ data.Table{
 [data]
 
 [data.migrate]
+startup = "off" # off / check / auto / role（默认 off）
 mode = "safe" # safe / strict / danger
 concurrentIndex = true # PostgreSQL: CREATE INDEX CONCURRENTLY
 timeout = "5m"
@@ -123,6 +124,23 @@ jitter = "250ms"
 - `safe`：只做非破坏性变更（建表/补列/补索引）
 - `strict`：输出破坏性漂移（不自动执行）
 - `danger`：允许执行破坏性变更（删多余列/索引）
+- `startup=off`：启动跳过自动迁移（默认）
+- `startup=check`：启动仅做 schema diff 校验，有漂移直接失败
+- `startup=auto`：启动自动执行 `Migrate`
+- `startup=role`：按 `BAMGOO_ROLE` 决定模式
+  - `BAMGOO_ROLE=migrator|migration|migrate|schema|schema-migrator` -> `auto`
+  - `BAMGOO_ROLE=app|api|worker|web` -> `check`
+  - 其它值或空 -> `off`
+
+示例（同一份配置，多角色运行）：
+
+```bash
+# 应用节点：只校验
+export BAMGOO_ROLE=app
+
+# 迁移任务节点：自动迁移
+export BAMGOO_ROLE=migrator
+```
 
 多节点启动保护（建议开启）：
 - 迁移分布式锁（避免并发节点互撞）

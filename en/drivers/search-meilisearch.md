@@ -39,5 +39,5 @@ timeout = "3s"
 - `sort` -> `sort`
 - `facets` -> `facets`
 - `highlight` -> `attributesToHighlight`
-- `CreateIndex` applies settings generated from `search.Index.Attributes`
+- index sync applies settings generated from `search.Index.Attributes`
 - highlighted values are merged back into original payload fields (no extra `highlight` field)

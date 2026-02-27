@@ -8,13 +8,14 @@ outline: deep
 
 ## 核心 API
 
-- `CreateIndex(name, index)`
-- `DropIndex(name)`
-- `Upsert(index, docs)`
+- 按已注册的 `search.Index` 自动同步索引结构
+- `Upsert(index, rows ...Map)`
+- `Clear(index)`
 - `Delete(index, ids)`
 - `Search(index, keyword, args ...Any)`
 - `Count(index, keyword, args ...Any)`
-- `Suggest(index, text, limit)`
+- `Signature(index, keyword, args ...Any)`
+- `GetCapabilities(index)` / `ListCapabilities()`
 
 ## 索引结构定义
 
@@ -61,6 +62,7 @@ path = "data/search"
 - `$fields`（同 `$select`）：返回字段
 - `$facets`：分面
 - `$highlight`：高亮
+- `$prefix`：前缀匹配
 - `$raw`、`$setting`：驱动扩展
 
 高亮结果会直接写回 `hits[].payload` 对应字段。

@@ -39,5 +39,5 @@ timeout = "3s"
 - `sort` -> `sort`
 - `facets` -> `facets`
 - `highlight` -> `attributesToHighlight`
-- `CreateIndex` 会应用基于 `search.Index.Attributes` 生成的 settings
+- 索引同步会应用基于 `search.Index.Attributes` 生成的 settings
 - 高亮结果会直接合并到原字段返回（不额外生成 `highlight` 字段）

@@ -4,6 +4,10 @@ outline: deep
 
 # data Advanced
 
+## Query DSL Compile Cache
+
+`ParseQuery/Parse` reuses compiled results for the same query args to reduce CPU cost on hot paths.
+
 ```go
 where, params := db.Parse(Map{"status": "active"})
 if db.Error() != nil {

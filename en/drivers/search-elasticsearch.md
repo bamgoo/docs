@@ -37,4 +37,4 @@ timeout = "5s"
 ## Mapping
 
 `search` DSL maps to Elasticsearch bool/filter/sort/aggs/highlight.
-`CreateIndex` maps `search.Index.Attributes` to index `mappings.properties`.
+index sync maps `search.Index.Attributes` to index `mappings.properties`.

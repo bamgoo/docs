@@ -8,13 +8,14 @@ outline: deep
 
 ## Core APIs
 
-- `CreateIndex(name, index)`
-- `DropIndex(name)`
-- `Upsert(index, docs)`
+- index schema is synced automatically from registered `search.Index`
+- `Upsert(index, rows ...Map)`
+- `Clear(index)`
 - `Delete(index, ids)`
 - `Search(index, keyword, args ...Any)`
 - `Count(index, keyword, args ...Any)`
-- `Suggest(index, text, limit)`
+- `Signature(index, keyword, args ...Any)`
+- `GetCapabilities(index)` / `ListCapabilities()`
 
 ## Index Schema
 
@@ -61,6 +62,7 @@ path = "data/search"
 - `$fields` (same as `$select`): selected fields
 - `$facets`: facet aggregations
 - `$highlight`: highlight fields
+- `$prefix`: prefix matching
 - `$raw`, `$setting`: driver specific extension
 
 Highlight values are written back into `hits[].payload` fields directly.

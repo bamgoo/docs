@@ -13,12 +13,14 @@ outline: deep
 - 新增 `db.Parse(...)`（驱动级解析）
 - 支持 `Slice`（直接返回 total + items）
 - 支持事务 `Tx`
+- 支持只读事务 `TxReadOnly`
 - 支持迁移 `Migrate`
 - 支持缓存（按表维度失效）
 - 支持数据变更 Watcher（`data.watcher`）
 - 支持 `WithContext/WithTimeout`（统一超时与取消）
 - 支持连接池配置（`maxOpen/maxIdle/maxLifetime/maxIdleTime`）
 - 支持连接池观测（`data.GetPoolStats()`）
+- Query DSL 解析编译缓存（相同查询入参复用）
 
 ## 安装
 
@@ -122,11 +124,19 @@ _ = db.Tx(func(tx data.DataBase) error {
 })
 ```
 
+```go
+_ = db.TxReadOnly(func(tx data.DataBase) error {
+  _ = tx.Table("user").Query(base.Map{"status": "active"})
+  return tx.Error()
+})
+```
+
 ## 子页面
 
 - [查询 DSL](/zh/modules/data-query)
 - [写入 DSL](/zh/modules/data-write)
 - [高级用法](/zh/modules/data-advanced)
+- [命名语义](/zh/modules/data-naming)
 - [字段命名映射](/zh/modules/data-field-mapping)
 - [接口迁移指南](/zh/modules/data-migration)
 - [结构迁移（Migrate）](/zh/modules/data-schema-migration)

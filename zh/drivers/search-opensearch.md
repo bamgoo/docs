@@ -36,4 +36,4 @@ timeout = "5s"
 ## 映射
 
 `search` DSL 会映射到 OpenSearch 的 bool/filter/sort/aggs/highlight。
-`CreateIndex` 会把 `search.Index.Attributes` 映射为 `mappings.properties`。
+索引同步会把 `search.Index.Attributes` 映射为 `mappings.properties`。

@@ -31,4 +31,4 @@ path = "store/search"
 - Good for local/small projects.
 - No external service required.
 - Includes fallback scan for better CJK keyword matching in simple scenarios.
-- `CreateIndex` uses `search.Index.Attributes` to build Bleve field mappings.
+- index sync uses `search.Index.Attributes` to build Bleve field mappings.

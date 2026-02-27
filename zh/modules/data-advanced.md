@@ -4,6 +4,10 @@ outline: deep
 
 # data 高级用法
 
+## Query DSL 编译缓存
+
+`ParseQuery/Parse` 对相同查询入参会复用已编译结果，减少高频接口 CPU 消耗。
+
 ## Slice（total + items）
 
 ```go

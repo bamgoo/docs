@@ -31,4 +31,4 @@ path = "store/search"
 - 适合本地和小项目。
 - 不依赖外部搜索服务。
 - 对 CJK 关键词做了兜底扫描，提升简单场景命中率。
-- `CreateIndex` 会根据 `search.Index.Attributes` 生成 Bleve 字段映射。
+- 索引同步会根据 `search.Index.Attributes` 生成 Bleve 字段映射。
