@@ -8,5 +8,6 @@ Covered modules:
 - scheduling: `cron`
 - search: `search`
 - data: `data`
+- tracing: `trace`
 - web stack: `http`, `web`, `view`
 - file stack: `storage`

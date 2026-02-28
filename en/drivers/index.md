@@ -11,5 +11,6 @@ Categories:
 - search: file, meilisearch, opensearch, elasticsearch
 - data: postgresql, mysql, sqlite, mongodb
 - log: file, greptime
+- trace: file, greptime, otlp
 - mutex: redis
 - storage: minio, s3

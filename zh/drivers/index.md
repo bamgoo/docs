@@ -28,5 +28,6 @@ database = 0
 - 搜索：`search-file`、`search-meilisearch`、`search-opensearch`、`search-elasticsearch`
 - 数据：`data-postgresql`、`data-mysql`、`data-sqlite`、`data-mongodb`
 - 日志：`log-file`、`log-greptime`
+- 追踪：`trace-file`、`trace-greptime`、`trace-otlp`
 - 锁：`mutex-redis`
 - 存储：`storage-minio`、`storage-s3`
