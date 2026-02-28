@@ -58,12 +58,15 @@ json = true
 
 [trace.greptime]
 driver = "greptime"
+fields = { trace_id = "tid", span_id = "sid", parent_span_id = "psid", timestamp = "ts" }
 [trace.greptime.setting]
 host = "127.0.0.1"
 port = 4001
 database = "public"
 table = "traces"
 ```
+
+Field mapping is configured on the connection itself (`trace.<conn>.fields`), not under `setting`.
 
 ## Usage
 

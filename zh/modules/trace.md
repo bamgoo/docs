@@ -58,12 +58,15 @@ json = true
 
 [trace.greptime]
 driver = "greptime"
+fields = { trace_id = "tid", span_id = "sid", parent_span_id = "psid", timestamp = "ts" }
 [trace.greptime.setting]
 host = "127.0.0.1"
 port = 4001
 database = "public"
 table = "traces"
 ```
+
+字段映射配置在连接本身（`trace.<conn>.fields`），不放在 `setting` 下。
 
 ## 使用方式
 

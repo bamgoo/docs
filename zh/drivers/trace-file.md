@@ -19,6 +19,7 @@ import _ "github.com/bamgoo/trace-file"
 driver = "file"
 json = true
 sample = 1
+fields = { trace_id = "tid", span_id = "sid", parent_span_id = "psid", timestamp = "ts" }
 
 [trace.file.setting]
 store = "store/trace"
@@ -29,7 +30,6 @@ maxline = 0
 compress = true
 maxage = "7d"
 maxfiles = 30
-fields = { trace_id = "tid", span_id = "sid", parent_span_id = "psid", timestamp = "ts" }
 ```
 
 ## 字段说明
@@ -42,7 +42,7 @@ fields = { trace_id = "tid", span_id = "sid", parent_span_id = "psid", timestamp
 - `compress`：切分后 gzip 压缩（`.gz`）
 - `maxage`：删除超过保留时长的切分文件（支持 `time.ParseDuration` 和 `7d`）
 - `maxfiles`：最多保留切分文件数量
-- `fields`：字段选择/映射（支持数组或映射）
+- `fields`（放在 `[trace.file]`）: 字段选择/映射（支持数组或映射）
 
 ### fields 示例
 
@@ -57,12 +57,14 @@ fields = { trace_id = "tid", span_id = "sid", parent_span_id = "psid" }
 [trace.file]
 driver = "file"
 json = true
+fields = ["trace_id", "span_id", "timestamp"]
 [trace.file.setting]
 store = "store/trace"
 output = "trace.log"
 
 [trace.greptime]
 driver = "greptime"
+fields = { trace_id = "tid", span_id = "sid", parent_span_id = "psid" }
 [trace.greptime.setting]
 host = "127.0.0.1"
 port = 4001
