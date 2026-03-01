@@ -1,23 +1,15 @@
 # docs
 
-`docs` 是 infrago 文档站点（VitePress）。
+`docs` 是 infrago 文档站点工程（VitePress）。
 
-## 本地开发
+## 主要功能
+
+- 维护中英文文档
+- 本地预览与静态站点构建
+
+## 本地运行
 
 ```bash
 npm install
 npm run dev
 ```
-
-## 构建
-
-```bash
-npm run build
-npm run preview
-```
-
-## 目录
-
-- `en/` 英文文档
-- `zh/` 中文文档
-- `.vitepress/` 站点配置
