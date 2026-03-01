@@ -4,7 +4,7 @@ outline: deep
 
 # trace
 
-`trace` is bamgoo's tracing module with multi-connection fanout (dual-write/multi-write).
+`trace` is infrago's tracing module with multi-connection fanout (dual-write/multi-write).
 
 ## Features
 
@@ -15,7 +15,7 @@ outline: deep
 - `Meta` integration: `ctx.Begin(...)` / `ctx.Trace(...)`
 - Auto span: `http/web/event/queue` entry auto begin/end, and `Invoke` creates child spans
 - Auto naming: `method:<key>` / `service:<key>` / `trigger:<key>` / `http:<key>` / `web:<key>` / `event:<key>` / `queue:<key>`
-- Built-in normalized attrs helper: `bamgoo.TraceAttrs(...)`
+- Built-in normalized attrs helper: `infra.TraceAttrs(...)`
 - `TraceHook` based; replaceable by third-party modules
 
 ## Config
@@ -73,7 +73,7 @@ Field mapping is configured on the connection itself (`trace.<conn>.fields`), no
 ### 1) Manual span
 
 ```go
-span := ctx.Begin("service:user.login", bamgoo.TraceAttrs("user", bamgoo.TraceKindServer, "login", Map{
+span := ctx.Begin("service:user.login", infra.TraceAttrs("user", infra.TraceKindServer, "login", Map{
   "module": "http",
   "operation": "serve",
 }))

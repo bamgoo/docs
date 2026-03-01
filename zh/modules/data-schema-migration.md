@@ -21,7 +21,7 @@ outline: deep
 ## 典型用法
 
 ```go
-bamgoo.Register("user", data.Table{
+infra.Register("user", data.Table{
   Key: "id",
   Fields: base.Vars{
     "id":    {Type: "int"},
@@ -127,19 +127,19 @@ jitter = "250ms"
 - `startup=off`：启动跳过自动迁移（默认）
 - `startup=check`：启动仅做 schema diff 校验，有漂移直接失败
 - `startup=auto`：启动自动执行 `Migrate`
-- `startup=role`：按 `BAMGOO_ROLE` 决定模式
-  - `BAMGOO_ROLE=migrator|migration|migrate|schema|schema-migrator` -> `auto`
-  - `BAMGOO_ROLE=app|api|worker|web` -> `check`
+- `startup=role`：按 `INFRAGO_ROLE` 决定模式
+  - `INFRAGO_ROLE=migrator|migration|migrate|schema|schema-migrator` -> `auto`
+  - `INFRAGO_ROLE=app|api|worker|web` -> `check`
   - 其它值或空 -> `off`
 
 示例（同一份配置，多角色运行）：
 
 ```bash
 # 应用节点：只校验
-export BAMGOO_ROLE=app
+export INFRAGO_ROLE=app
 
 # 迁移任务节点：自动迁移
-export BAMGOO_ROLE=migrator
+export INFRAGO_ROLE=migrator
 ```
 
 多节点启动保护（建议开启）：
@@ -150,7 +150,7 @@ export BAMGOO_ROLE=migrator
 
 ## 建议
 
-- 在 `bamgoo.START` 里执行迁移
+- 在 `infra.START` 里执行迁移
 - 生产环境复杂变更（改类型/删列）用手工 SQL 或专用迁移脚本
 
 ## 生产发布建议流程

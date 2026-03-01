@@ -2,7 +2,7 @@
 
 Covered modules:
 
-- core: `bamgoo`
+- core: `infrago`
 - infra basics: `config`, `cache`, `log`, `mutex`
 - messaging: `bus`, `event`, `queue`
 - scheduling: `cron`

@@ -30,7 +30,7 @@ driver = "minio"
 [storage.default.setting]
 endpoint = "127.0.0.1:9000"
 region = "us-east-1"
-bucket = "bamgoo"
+bucket = "infrago"
 access = "minioadmin"
 secret = "minioadmin"
 use_ssl = false

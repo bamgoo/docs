@@ -30,6 +30,6 @@ driver = "natsjs"
 
 [event.default.setting]
 url = "nats://127.0.0.1:4222"
-stream = "BAMGOOE"
+stream = "INFRAGOE"
 group = "worker"
 ```

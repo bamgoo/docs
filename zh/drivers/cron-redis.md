@@ -31,7 +31,7 @@ driver = "redis"
 [cron.setting]
 addr = "127.0.0.1:6379"
 database = 0
-jobs_key = "bamgoo:cron:jobs"
-logs_prefix = "bamgoo:cron:logs:"
-locks_prefix = "bamgoo:cron:locks:"
+jobs_key = "infrago:cron:jobs"
+logs_prefix = "infrago:cron:logs:"
+locks_prefix = "infrago:cron:locks:"
 ```

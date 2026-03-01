@@ -43,7 +43,7 @@ mapping = false
 ## 示例
 
 ```go
-bamgoo.Register("user", data.Table{
+infra.Register("user", data.Table{
   Key: "id",
   Fields: base.Vars{
     "id":         {Type: "int"},

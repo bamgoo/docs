@@ -40,7 +40,7 @@ Watcher uses the same write-op names:
 - `Action` (all write operations)
 
 ```go
-bamgoo.Register("user", data.Watcher{
+infra.Register("user", data.Watcher{
   Action: func(m data.Mutation) {},
   Insert: func(m data.Mutation) {},
   Update: func(m data.Mutation) {},

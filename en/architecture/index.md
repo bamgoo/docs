@@ -1,6 +1,6 @@
 # Architecture Overview
 
-bamgoo follows a three-layer design:
+infrago follows a three-layer design:
 
 - Runtime: lifecycle and registration dispatcher.
 - Modules: HTTP, Web, Event, Queue, Cron, Storage, etc.

@@ -15,7 +15,7 @@ outline: deep
 download = "store/download"
 thumbnail = "store/thumbnail"
 preview = "store/preview"
-salt = "bamgoo"
+salt = "infrago"
 
 [storage.default]
 driver = "s3"

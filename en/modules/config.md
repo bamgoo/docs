@@ -4,7 +4,7 @@ Loads runtime configuration through pluggable drivers.
 
 Sources:
 
-- environment variables (`BAMGOO_*`)
+- environment variables (`INFRAGO_*`)
 - command-line args (`--key=value`)
 
 Drivers:

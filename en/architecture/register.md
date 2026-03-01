@@ -1,6 +1,6 @@
 # Register & Dispatch
 
-`bamgoo.Register(name, value)` is the unified registration API.
+`infra.Register(name, value)` is the unified registration API.
 
 Behavior:
 
@@ -8,4 +8,4 @@ Behavior:
 - Each module consumes only known types.
 - This keeps app code uniform while modules stay decoupled.
 
-`bamgoo.Override(true)` allows overriding existing registrations.
+`infra.Override(true)` allows overriding existing registrations.

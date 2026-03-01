@@ -21,7 +21,7 @@ outline: deep
 ## Typical usage
 
 ```go
-bamgoo.Register("user", data.Table{
+infra.Register("user", data.Table{
   Key: "id",
   Fields: base.Vars{
     "id":    {Type: "int"},
@@ -127,19 +127,19 @@ jitter = "250ms"
 - `startup=off`: skip startup auto-migrate (default)
 - `startup=check`: startup schema-diff check only, fail on drift
 - `startup=auto`: run `Migrate` automatically at startup
-- `startup=role`: resolve by `BAMGOO_ROLE`
-  - `BAMGOO_ROLE=migrator|migration|migrate|schema|schema-migrator` -> `auto`
-  - `BAMGOO_ROLE=app|api|worker|web` -> `check`
+- `startup=role`: resolve by `INFRAGO_ROLE`
+  - `INFRAGO_ROLE=migrator|migration|migrate|schema|schema-migrator` -> `auto`
+  - `INFRAGO_ROLE=app|api|worker|web` -> `check`
   - empty/others -> `off`
 
 Example (single config, multi-role runtime):
 
 ```bash
 # app nodes: check-only
-export BAMGOO_ROLE=app
+export INFRAGO_ROLE=app
 
 # migration job: auto migrate
-export BAMGOO_ROLE=migrator
+export INFRAGO_ROLE=migrator
 ```
 
 Multi-node startup protection:
@@ -150,7 +150,7 @@ Multi-node startup protection:
 
 ## Recommendation
 
-- Run migration at startup (`bamgoo.START`)
+- Run migration at startup (`infra.START`)
 - For destructive changes (drop/type change), use manual SQL or dedicated scripts
 
 ## Production Release Flow

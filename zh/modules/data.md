@@ -4,7 +4,7 @@ outline: deep
 
 # data
 
-`data` 是 bamgoo 的统一数据层模块，支持 SQL 与 MongoDB 驱动。
+`data` 是 infrago 的统一数据层模块，支持 SQL 与 MongoDB 驱动。
 
 ## 核心变化（最新版）
 
@@ -25,11 +25,11 @@ outline: deep
 ## 安装
 
 ```bash
-go get github.com/bamgoo/data
-go get github.com/bamgoo/data-postgresql
-go get github.com/bamgoo/data-mysql
-go get github.com/bamgoo/data-sqlite
-go get github.com/bamgoo/data-mongodb
+go get github.com/infrago/data
+go get github.com/infrago/data-postgresql
+go get github.com/infrago/data-mysql
+go get github.com/infrago/data-sqlite
+go get github.com/infrago/data-mongodb
 ```
 
 ## 使用风格

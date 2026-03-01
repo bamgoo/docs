@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "bamgoo"
+  name: "infrago"
   text: "模块化 Go 框架文档"
   tagline: "Runtime + Modules + Drivers 的统一工程组织。"
   actions:
@@ -14,7 +14,7 @@ hero:
       link: /en/
     - theme: alt
       text: GitHub
-      link: https://github.com/bamgoo/bamgoo
+      link: https://github.com/infrago/infra
 
 features:
   - title: 架构优先

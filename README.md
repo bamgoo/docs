@@ -1,6 +1,6 @@
-# bamgoo docs
+# infrago docs
 
-VitePress docs for bamgoo.
+VitePress docs for infra.
 
 ## Structure
 

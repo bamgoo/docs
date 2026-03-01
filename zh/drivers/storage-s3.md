@@ -30,7 +30,7 @@ driver = "s3"
 
 [storage.default.setting]
 region = "us-east-1"
-bucket = "bamgoo"
+bucket = "infrago"
 access = "AKIA..."
 secret = "..."
 endpoint = "https://s3.amazonaws.com"

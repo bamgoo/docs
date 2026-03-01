@@ -1,4 +1,4 @@
-# bamgoo (core)
+# infrago (core)
 
 Responsibilities:
 
@@ -9,7 +9,7 @@ Responsibilities:
 
 Key APIs:
 
-- `bamgoo.Register`
-- `bamgoo.Ready`
-- `bamgoo.Go`
+- `infra.Register`
+- `infra.Ready`
+- `infra.Go`
 - `ctx.Invoke` / `ctx.Result`

@@ -19,7 +19,7 @@ NATS 队列驱动，支持普通 NATS 与 JetStream，支持延迟和重试。
 - `token`
 - `user` / `username`
 - `pass` / `password`
-- `stream`（JetStream，默认 `BAMGOOQ`）
+- `stream`（JetStream，默认 `INFRAGOQ`）
 
 ## 示例
 

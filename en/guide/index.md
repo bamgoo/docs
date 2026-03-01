@@ -4,7 +4,7 @@ outline: deep
 
 # Guide
 
-This guide follows the `infrago/docs` style and provides the primary learning path for bamgoo.
+This guide follows the `infrago/docs` style and provides the primary learning path for infra.
 
 ## Reading Path
 
@@ -16,7 +16,7 @@ This guide follows the `infrago/docs` style and provides the primary learning pa
 
 ## Design Axis
 
-bamgoo has four major parts:
+infrago has four major parts:
 
 - Core (runtime)
 - Modules

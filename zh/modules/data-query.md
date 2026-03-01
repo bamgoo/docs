@@ -83,7 +83,7 @@ _ = rows
 
 ```go
 res := db.Table("article").Scan(func(row base.Map) base.Res {
-  return bamgoo.OK
+  return infra.OK
 }, base.Map{
   "status": "active",
   "$batch": 500,

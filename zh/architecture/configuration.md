@@ -4,7 +4,7 @@ outline: deep
 
 # 配置模型
 
-bamgoo 配置本质是 `Map` 分发到各模块。
+infrago 配置本质是 `Map` 分发到各模块。
 
 ## 基本形态
 
@@ -29,7 +29,7 @@ database = 0
 
 通常是：
 
-1. 环境变量（`BAMGOO_*`）
+1. 环境变量（`INFRAGO_*`）
 2. 命令行参数（`--key=value`）
 3. 配置驱动读取内容（file/redis 等）
 

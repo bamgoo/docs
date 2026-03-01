@@ -1,6 +1,6 @@
 # Runtime Lifecycle
 
-`bamgoo.Go()` runs the full lifecycle in this order:
+`infra.Go()` runs the full lifecycle in this order:
 
 1. Load
 2. Setup
@@ -14,4 +14,4 @@ Notes:
 
 - `START` triggers are fired after all modules start.
 - `STOP` triggers are fired before module shutdown.
-- `bamgoo.Ready()` stops at `Open`.
+- `infra.Ready()` stops at `Open`.

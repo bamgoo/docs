@@ -4,7 +4,7 @@ outline: deep
 
 # data
 
-`data` is bamgoo's unified data module.
+`data` is infrago's unified data module.
 
 ## Latest API style
 

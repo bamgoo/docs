@@ -1,13 +1,13 @@
 import { defineConfig } from 'vitepress'
 
 const zhNav = [
-  { text: '总站首页', link: 'https://bamgoo.org' },
+  { text: '总站首页', link: 'https://infra.org' },
   { text: '首页', link: '/zh/' },
   { text: '指南', link: '/zh/guide/' }
 ]
 
 const enNav = [
-  { text: 'Main Site', link: 'https://bamgoo.org' },
+  { text: 'Main Site', link: 'https://infra.org' },
   { text: 'Home', link: '/en/' },
   { text: 'Guide', link: '/en/guide/' }
 ]
@@ -37,7 +37,7 @@ const zhSidebar = [
     text: '模块',
     items: [
       { text: '总览', link: '/zh/modules/' },
-      { text: 'bamgoo (core)', link: '/zh/modules/bamgoo' },
+      { text: 'infrago (core)', link: '/zh/modules/infrago' },
       { text: 'config', link: '/zh/modules/config' },
       { text: 'cache', link: '/zh/modules/cache' },
       { text: 'bus', link: '/zh/modules/bus' },
@@ -116,7 +116,7 @@ const enSidebar = [
     text: 'Modules',
     items: [
       { text: 'Overview', link: '/en/modules/' },
-      { text: 'bamgoo (core)', link: '/en/modules/bamgoo' },
+      { text: 'infrago (core)', link: '/en/modules/infrago' },
       { text: 'config', link: '/en/modules/config' },
       { text: 'cache', link: '/en/modules/cache' },
       { text: 'bus', link: '/en/modules/bus' },
@@ -171,8 +171,8 @@ const enSidebar = [
 ]
 
 export default defineConfig({
-  title: 'bamgoo docs',
-  description: 'bamgoo framework documentation',
+  title: 'infrago docs',
+  description: 'infrago framework documentation',
   cleanUrls: true,
   themeConfig: {
     logoLink: '/',
@@ -180,7 +180,7 @@ export default defineConfig({
       '/zh/': zhSidebar,
       '/en/': enSidebar
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/bamgoo/bamgoo' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/infrago/infra' }]
   },
   locales: {
     root: {
@@ -188,7 +188,7 @@ export default defineConfig({
       label: 'Home',
       themeConfig: {
         nav: [
-          { text: 'Main Site', link: 'https://bamgoo.org' },
+          { text: 'Main Site', link: 'https://infra.org' },
           { text: '中文', link: '/zh/' },
           { text: 'English', link: '/en/' }
         ]
@@ -197,8 +197,8 @@ export default defineConfig({
     en: {
       lang: 'en-US',
       label: 'English',
-      title: 'bamgoo Docs',
-      description: 'bamgoo framework documentation',
+      title: 'infrago Docs',
+      description: 'infrago framework documentation',
       themeConfig: {
         nav: enNav,
         sidebar: enSidebar
@@ -207,8 +207,8 @@ export default defineConfig({
     zh: {
       lang: 'zh-CN',
       label: '简体中文',
-      title: 'bamgoo 文档',
-      description: 'bamgoo 框架文档',
+      title: 'infrago 文档',
+      description: 'infrago 框架文档',
       themeConfig: {
         nav: zhNav,
         sidebar: zhSidebar

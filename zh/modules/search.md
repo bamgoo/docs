@@ -26,7 +26,7 @@ outline: deep
 - 建索引时：驱动可按 `Attributes` 自动生成后端结构。
 
 ```go
-bamgoo.Register("article", search.Index{
+infra.Register("article", search.Index{
   Primary: "id",
   Attributes: Vars{
     "id":       Var{Type: "string", Required: true},

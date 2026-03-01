@@ -4,7 +4,7 @@ outline: deep
 
 # 指南
 
-本指南按 `infrago/docs` 的组织方式，集中说明 bamgoo 的核心设计与使用路径。
+本指南按 `infrago/docs` 的组织方式，集中说明 infrago 的核心设计与使用路径。
 
 ## 阅读路径
 
@@ -16,7 +16,7 @@ outline: deep
 
 ## 设计主轴
 
-bamgoo 主要由四个部分组成：
+infrago 主要由四个部分组成：
 
 - 核心（runtime）
 - 模块（module）

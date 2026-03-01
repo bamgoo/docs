@@ -40,7 +40,7 @@ Watcher 使用同一组写操作名：
 - `Action`（监听全部写操作）
 
 ```go
-bamgoo.Register("user", data.Watcher{
+infra.Register("user", data.Watcher{
   Action: func(m data.Mutation) {},
   Insert: func(m data.Mutation) {},
   Update: func(m data.Mutation) {},

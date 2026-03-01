@@ -4,7 +4,7 @@ outline: deep
 
 # 运行时生命周期
 
-`bamgoo.Go()` 会执行完整生命周期。
+`infra.Go()` 会执行完整生命周期。
 
 ## 执行顺序
 
@@ -42,4 +42,4 @@ Close()
 
 ## 只初始化不运行
 
-`bamgoo.Ready()` 会执行到 `Open`，适合测试、预热和嵌入式场景。
+`infra.Ready()` 会执行到 `Open`，适合测试、预热和嵌入式场景。

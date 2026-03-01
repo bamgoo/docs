@@ -10,7 +10,7 @@ outline: deep
 
 ## 解析优先级
 
-1. 环境变量：`BAMGOO_*`
+1. 环境变量：`INFRAGO_*`
 2. 命令行参数：`--key=value` 或 `--key value`
 3. 驱动读取：如 `file` / `redis`
 
@@ -26,7 +26,7 @@ outline: deep
 ./app config.toml
 
 # 指定驱动与参数
-./app --driver=redis --server=127.0.0.1 --database=0 --key=bamgoo-config
+./app --driver=redis --server=127.0.0.1 --database=0 --key=infrago-config
 ```
 
 ## 相关驱动

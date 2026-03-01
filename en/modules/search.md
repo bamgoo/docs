@@ -26,7 +26,7 @@ outline: deep
 - CreateIndex path: drivers can generate backend index schema from attributes.
 
 ```go
-bamgoo.Register("article", search.Index{
+infra.Register("article", search.Index{
   Primary: "id",
   Attributes: Vars{
     "id":       Var{Type: "string", Required: true},

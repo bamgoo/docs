@@ -20,7 +20,7 @@ lockttl = "30s"
 [cron.setting]
 addr = "127.0.0.1:6379"
 database = 0
-jobs_key = "bamgoo:cron:jobs"
+jobs_key = "infrago:cron:jobs"
 ```
 
 字段：

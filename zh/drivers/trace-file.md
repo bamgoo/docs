@@ -9,7 +9,7 @@ outline: deep
 ## 安装
 
 ```go
-import _ "github.com/bamgoo/trace-file"
+import _ "github.com/infrago/trace-file"
 ```
 
 ## 配置

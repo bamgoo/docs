@@ -30,7 +30,7 @@ _ = rows
 ## Cache Invalidation Sync (Multi-node)
 
 `data` syncs table-level cache invalidation via internal service `_data.cache.invalidate`
-and `bamgoo.Broadcast`.  
+and `infra.Broadcast`.  
 It uses BusHook by default (usually `bus` module), and remains replaceable.
 
 ## Data Mutation Watcher
@@ -47,20 +47,20 @@ payload = "minimal" # minimal | full
 ```
 
 ```go
-bamgoo.Register("*", data.Watcher{
+infra.Register("*", data.Watcher{
 	Action: func(m data.Mutation) {
 		// any write op (insert/update/upsert/delete)
 	},
 })
 
-bamgoo.Register("user", data.Watcher{
+infra.Register("user", data.Watcher{
 	Insert: func(m data.Mutation) {},
 	Update: func(m data.Mutation) {},
 	Upsert: func(m data.Mutation) {},
 	Delete: func(m data.Mutation) {},
 })
 
-bamgoo.Register("sys.*", data.Watcher{
+infra.Register("sys.*", data.Watcher{
 	Action: func(m data.Mutation) {
 		// matches sys.staff / sys.role / sys.staff.detail ...
 	},

@@ -13,7 +13,7 @@ outline: deep
 
 ## 触发链路
 
-触发器 `bamgoo.Trigger` 在 `Setup` 阶段被编译成内部方法，随后在 `START/STOP` 时触发。
+触发器 `infra.Trigger` 在 `Setup` 阶段被编译成内部方法，随后在 `START/STOP` 时触发。
 
 ## 元数据传递
 

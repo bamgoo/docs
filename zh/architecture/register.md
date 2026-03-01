@@ -4,10 +4,10 @@ outline: deep
 
 # 注册与分发机制
 
-bamgoo 使用统一注册入口：
+infrago 使用统一注册入口：
 
 ```go
-bamgoo.Register(name, value)
+infra.Register(name, value)
 ```
 
 ## 核心机制
@@ -21,7 +21,7 @@ bamgoo.Register(name, value)
 - 驱动：`cache.Driver`、`queue.Driver` 等
 - 配置：`cache.Config`、`log.Config` 等
 - 组件：`http.Router`、`event.Event`、`cron.Job` 等
-- 服务：`bamgoo.Method`、`bamgoo.Service`
+- 服务：`infra.Method`、`infra.Service`
 
 ## 注册建议
 
@@ -29,4 +29,4 @@ bamgoo.Register(name, value)
 
 ## 覆盖策略
 
-`bamgoo.Override(true)` 开启后，同名对象允许覆盖。
+`infra.Override(true)` 开启后，同名对象允许覆盖。

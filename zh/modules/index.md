@@ -4,18 +4,18 @@ outline: deep
 
 # 模块总览
 
-bamgoo 以模块化组织能力，每个模块都通过 `bamgoo.Mount(module)` 接入统一生命周期。
+infrago 以模块化组织能力，每个模块都通过 `infra.Mount(module)` 接入统一生命周期。
 
 ## 阅读顺序
 
-1. 先看 [bamgoo 核心模块](/zh/modules/bamgoo)
+1. 先看 [infrago 核心模块](/zh/modules/infrago)
 2. 再看基础模块：`config / log / cache / mutex`
 3. 再看通信模块：`bus / event / queue`
 4. 再看调度、搜索、数据与 Web：`cron / search / data / trace / http / web / view / storage`
 
 ## 模块分类
 
-- 核心：`bamgoo`
+- 核心：`infrago`
 - 配置：`config`
 - 日志与状态：`log` `cache` `mutex`
 - 通信：`bus` `event` `queue`

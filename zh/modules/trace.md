@@ -4,7 +4,7 @@ outline: deep
 
 # trace
 
-`trace` 是 bamgoo 的链路追踪模块，支持多连接并行写入（双写/多写）。
+`trace` 是 infrago 的链路追踪模块，支持多连接并行写入（双写/多写）。
 
 ## 核心特性
 
@@ -15,7 +15,7 @@ outline: deep
 - 与 `Meta` 集成：`ctx.Begin(...)` / `ctx.Trace(...)`
 - 自动 span：`http/web/event/queue` 入口自动 begin/end，`Invoke` 自动子 span
 - 自动命名：`method:<key>` / `service:<key>` / `trigger:<key>` / `http:<key>` / `web:<key>` / `event:<key>` / `queue:<key>`
-- 内置统一属性构建：`bamgoo.TraceAttrs(...)`
+- 内置统一属性构建：`infra.TraceAttrs(...)`
 - 通过 `TraceHook` 挂接，可被第三方模块替换
 
 ## 配置
@@ -73,7 +73,7 @@ table = "traces"
 ### 1. 手动 span
 
 ```go
-span := ctx.Begin("service:user.login", bamgoo.TraceAttrs("user", bamgoo.TraceKindServer, "login", base.Map{
+span := ctx.Begin("service:user.login", infra.TraceAttrs("user", infra.TraceKindServer, "login", base.Map{
   "module": "http",
   "operation": "serve",
 }))

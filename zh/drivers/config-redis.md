@@ -17,11 +17,11 @@ outline: deep
 - `server` `port`
 - `username` `password`
 - `database`
-- `key`（默认 `bamgoo-config`）
+- `key`（默认 `infrago-config`）
 - `format`（可选，`toml/json`）
 
 ## 示例
 
 ```bash
-./app --driver=redis --server=127.0.0.1 --port=6379 --key=bamgoo-config
+./app --driver=redis --server=127.0.0.1 --port=6379 --key=infrago-config
 ```

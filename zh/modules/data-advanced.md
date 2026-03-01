@@ -45,7 +45,7 @@ _ = caps
 
 ## 缓存失效同步（多节点）
 
-`data` 会通过内部服务 `_data.cache.invalidate` + `bamgoo.Broadcast` 同步按表失效事件。  
+`data` 会通过内部服务 `_data.cache.invalidate` + `infra.Broadcast` 同步按表失效事件。  
 默认走 BusHook（通常是 `bus` 模块），可替换自定义实现。
 
 ## 数据变更 Watcher
@@ -62,20 +62,20 @@ payload = "minimal" # minimal | full
 ```
 
 ```go
-bamgoo.Register("*", data.Watcher{
+infra.Register("*", data.Watcher{
 	Action: func(m data.Mutation) {
 		// 任意写操作（insert/update/upsert/delete）
 	},
 })
 
-bamgoo.Register("user", data.Watcher{
+infra.Register("user", data.Watcher{
 	Insert: func(m data.Mutation) {},
 	Update: func(m data.Mutation) {},
 	Upsert: func(m data.Mutation) {},
 	Delete: func(m data.Mutation) {},
 })
 
-bamgoo.Register("sys.*", data.Watcher{
+infra.Register("sys.*", data.Watcher{
 	Action: func(m data.Mutation) {
 		// 匹配 sys.staff / sys.role / sys.staff.detail ...
 	},

@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "bamgoo"
+  name: "infrago"
   text: "Modular Go Framework Docs"
   tagline: "Organized around Runtime + Modules + Drivers."
   actions:
@@ -14,7 +14,7 @@ hero:
       link: /zh/
     - theme: alt
       text: GitHub
-      link: https://github.com/bamgoo/bamgoo
+      link: https://github.com/infrago/infra
 
 features:
   - title: Architecture First
