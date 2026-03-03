@@ -1,4 +1,4 @@
-# data-postgresql
+# data-postgres
 
 PostgreSQL driver for `data`.
 

@@ -38,13 +38,17 @@ It uses BusHook by default (usually `bus` module), and remains replaceable.
 Watcher matching is table-pattern based (supports dotted table names), not `table.op`.
 
 ```toml
-[data.watcher]
+[data.main.watcher]
 enable = true
 workers = 2
 queue = 2048
 overflow = "drop" # drop | block
 payload = "minimal" # minimal | full
+keys = false # false (default) | true
 ```
+
+`Mutation` always includes `Key` (single primary key when available).  
+When `watcher.keys = true`, it also includes `Keys` (matched primary-key list).
 
 ```go
 infra.Register("*", data.Watcher{

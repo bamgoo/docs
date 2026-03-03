@@ -26,7 +26,7 @@ outline: deep
 
 ```bash
 go get github.com/infrago/data
-go get github.com/infrago/data-postgresql
+go get github.com/infrago/data-postgres
 go get github.com/infrago/data-mysql
 go get github.com/infrago/data-sqlite
 go get github.com/infrago/data-mongodb
@@ -141,7 +141,7 @@ _ = db.TxReadOnly(func(tx data.DataBase) error {
 - [接口迁移指南](/zh/modules/data-migration)
 - [结构迁移（Migrate）](/zh/modules/data-schema-migration)
 - 驱动：
-  - [data-postgresql](/zh/drivers/data-postgresql)
+  - [data-postgres](/zh/drivers/data-postgres)
   - [data-mysql](/zh/drivers/data-mysql)
   - [data-sqlite](/zh/drivers/data-sqlite)
   - [data-mongodb](/zh/drivers/data-mongodb)

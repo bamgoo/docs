@@ -1,4 +1,4 @@
-# cron-pgsql
+# cron-postgres
 
 Driver page for this module integration.
 

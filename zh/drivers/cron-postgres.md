@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# cron-pgsql
+# cron-postgres
 
 ## 用途
 

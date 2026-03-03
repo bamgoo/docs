@@ -53,13 +53,17 @@ _ = caps
 Watcher 现在按“表模式”匹配（支持多级表名），不再用 `table.op` 形式。
 
 ```toml
-[data.watcher]
+[data.main.watcher]
 enable = true
 workers = 2
 queue = 2048
 overflow = "drop" # drop | block
 payload = "minimal" # minimal | full
+keys = false # false（默认）| true
 ```
+
+`Mutation` 会一直包含 `Key`（可用时为单个主键）。  
+当 `watcher.keys = true` 时，还会带 `Keys`（命中主键列表）。
 
 ```go
 infra.Register("*", data.Watcher{

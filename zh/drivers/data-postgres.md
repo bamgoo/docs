@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# data-postgresql
+# data-postgres
 
 `data` 模块 PostgreSQL 驱动。
 

@@ -35,6 +35,27 @@ if db.Error() != nil {
 _ = newItem
 ```
 
+单条与批量更新/删除：
+
+```go
+// Update：只更新命中的第一条（未传 $sort 时按主键升序）
+one := db.Table("user").Update(base.Map{
+  "$set": base.Map{"status": "active"},
+}, base.Map{"status": "pending"})
+
+// UpdateMany：更新全部命中
+many := db.Table("user").UpdateMany(base.Map{
+  "$set": base.Map{"status": "active"},
+}, base.Map{"status": "pending"})
+
+// Delete：只删除命中的第一条
+delOne := db.Table("user").Delete(base.Map{"status": "inactive"})
+
+// DeleteMany：删除全部命中
+delMany := db.Table("user").DeleteMany(base.Map{"status": "inactive"})
+_, _, _, _ = one, many, delOne, delMany
+```
+
 ## 批量
 
 ```go

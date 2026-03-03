@@ -103,7 +103,7 @@ See details: [field name mapping](/en/modules/data-field-mapping)
 ## Drivers
 
 Drivers:
-- [data-postgresql](/en/drivers/data-postgresql)
+- [data-postgres](/en/drivers/data-postgres)
 - [data-mysql](/en/drivers/data-mysql)
 - [data-sqlite](/en/drivers/data-sqlite)
 - [data-mongodb](/en/drivers/data-mongodb)

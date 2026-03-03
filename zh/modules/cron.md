@@ -45,5 +45,5 @@ jobs_key = "infrago:cron:jobs"
 ## 驱动
 
 - `default`
-- [cron-pgsql](/zh/drivers/cron-pgsql)
+- [cron-postgres](/zh/drivers/cron-postgres)
 - [cron-redis](/zh/drivers/cron-redis)

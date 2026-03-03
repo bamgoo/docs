@@ -22,6 +22,27 @@ if db.Error() != nil {
 }
 ```
 
+Single vs many update/delete:
+
+```go
+// Update: only first matched row (default by primary key ASC when no $sort)
+one := db.Table("user").Update(Map{
+  "$set": Map{"status": "active"},
+}, Map{"status": "pending"})
+
+// UpdateMany: all matched rows
+many := db.Table("user").UpdateMany(Map{
+  "$set": Map{"status": "active"},
+}, Map{"status": "pending"})
+
+// Delete: only first matched row
+delOne := db.Table("user").Delete(Map{"status": "inactive"})
+
+// DeleteMany: all matched rows
+delMany := db.Table("user").DeleteMany(Map{"status": "inactive"})
+_, _, _, _ = one, many, delOne, delMany
+```
+
 ## Migration
 
 ```go

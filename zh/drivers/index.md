@@ -24,9 +24,9 @@ database = 0
 - 总线：`bus-nats`、`bus-redis`
 - 事件：`event-nats`、`event-redis`
 - 队列：`queue-nats`、`queue-redis`
-- 调度：`cron-pgsql`、`cron-redis`
+- 调度：`cron-postgres`、`cron-redis`
 - 搜索：`search-file`、`search-meilisearch`、`search-opensearch`、`search-elasticsearch`
-- 数据：`data-postgresql`、`data-mysql`、`data-sqlite`、`data-mongodb`
+- 数据：`data-postgres`、`data-mysql`、`data-sqlite`、`data-mongodb`
 - 日志：`log-file`、`log-greptime`
 - 追踪：`trace-file`、`trace-greptime`、`trace-otlp`
 - 锁：`mutex-redis`
