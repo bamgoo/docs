@@ -32,25 +32,17 @@ outline: deep
 - `bus` 负责模块与节点之间的消息
 - `ws` 负责节点到客户端之间的实时通道
 
-## Upgrade 接入点
+## Upgrade 与 Space
 
-`http/web` 现在不再直接耦合 `ws`。
+`http/web` 直接依赖 `ws`，`ctx.Upgrade(spaces ...string)` 会在升级后进入 `ws.Accept(...)`。
 
-它们只提供：
+默认规则：
 
-- `ctx.Upgrade(names ...string)`
-- `http.Endpoint`
-- `web.Endpoint`
+- `ctx.Upgrade()`：默认 `space = ctx.Name`
+- 如果 `ctx.Name == ""`，则回退 `infra.DEFAULT`
+- `ctx.Upgrade("custom")`：显式使用 `custom` 空间
 
-`ws` 模块会在启动时自行注册默认 Upgrade 接管器，因此：
-
-- `ctx.Upgrade()`：优先使用未命名默认 `Endpoint`，没有则走默认 Upgrade 接管器
-- `ctx.Upgrade("custom")`：显式使用自定义接入点
-
-这意味着：
-
-- 你可以继续像以前一样直接用 `ctx.Upgrade()`
-- 也可以注册自己的接入实现，而不改 `http/web` 模块本身
+这样做的目的不是接入多种 websocket 实现，而是让同一项目中的多个 websocket 场景天然隔离。
 
 ## 基本模型
 
@@ -68,34 +60,9 @@ infra.Register(".socket", web.Router{
 })
 ```
 
-### 自定义接入点
+### 自定义 Space
 
 ```go
-infra.Register("custom", web.Endpoint{
-    Name: "custom",
-    Desc: "自定义 websocket 接入点",
-    Accept: func(ctx *web.Context, socket web.Socket) error {
-        return ws.Accept(ws.AcceptOptions{
-            Conn:       socket,
-            Meta:       ctx.Meta,
-            Name:       ctx.Name,
-            Site:       ctx.Site,
-            Host:       ctx.Host,
-            Domain:     ctx.Domain,
-            RootDomain: ctx.RootDomain,
-            Path:       ctx.Path,
-            Uri:        ctx.Uri,
-            Setting:    ctx.Setting,
-            Params:     ctx.Params,
-            Query:      ctx.Query,
-            Form:       ctx.Form,
-            Value:      ctx.Value,
-            Args:       ctx.Args,
-            Locals:     ctx.Locals,
-        })
-    },
-})
-
 infra.Register(".socket.custom", web.Router{
     Uri:  "/socket/custom",
     Name: "custom socket",
@@ -165,6 +132,29 @@ infra.Register("demo.echoed", ws.Command{
 
 这种拆分比把上下行都叫 event 更清楚，尤其在做协议导出、文档和权限控制时更稳。
 
+## Space 隔离
+
+`ws` 内部这些能力都按 `space` 隔离：
+
+- `Message / Command`
+- `Hook / Filter / Handler`
+- `Session / User / Group`
+- `Broadcast / Groupcast / PushUser`
+- 节点间 `_ws.dispatch`
+
+注册与查找规则：
+
+- `Message / Command / Handler`
+  先查当前 `space`，找不到再回退全局 `infra.DEFAULT`
+- `Filter / Hook`
+  执行全局 `infra.DEFAULT` + 当前 `space`
+
+如果不在 `ctx` 内，但要显式指定空间，可以使用：
+
+- `ws.PushUserIn(space, uid, msg, data)`
+- `ws.BroadcastIn(space, msg, data)`
+- `ws.GroupcastIn(space, gid, msg, data)`
+
 ## Hook / Filter / Handler
 
 - `ws.Hook`
@@ -222,8 +212,6 @@ _ = ctx.Answer("demo.notice", nil, ctx.Result())
 [ws]
 format = "text"
 codec = "json"
-message_key = "name"
-payload_key = "data"
 ping_interval = "30s"
 read_timeout = "75s"
 write_timeout = "10s"
@@ -241,12 +229,17 @@ observe_trace = false
 
 - `format`：`text` / `binary`
 - `codec`：默认 `json`
-- `message_key` / `payload_key`：协议字段名
 - `ping_interval` / `read_timeout` / `write_timeout`
 - `max_message_size`
 - `queue_size` / `queue_policy`
 - `compression` / `compress_level`
 - `observe_interval` / `observe_log` / `observe_trace`
+
+协议字段固定为：
+
+- 请求：`name` + `data`
+- 响应：`code` + `name` + `data` + `text` + `time`
+- 输入端继续兼容 `msg` / `args`
 
 ## 队列与背压
 
@@ -278,10 +271,19 @@ ws.Command{
 `ws.Export()` 返回前端友好的文档结构，包括：
 
 - 配置
+- 导出 schema 元信息
 - 请求/响应 envelope
+- `spaces` 汇总视图
 - `Message / Command` 定义
-- 每条协议的 sample payload
+- 每条协议的 `request / response` 示例
 - 内置错误码说明
+
+其中：
+
+- `space` 只作为导出文档中的隔离元信息，不会出现在实际 websocket 包体里
+- 顶层 `schema.version` 用于前端缓存、校验和协议展示版本对齐
+- `spaces` 会统计每个空间下的消息、命令、过滤器、处理器、钩子数量
+- `messages / commands` 仍然按 `space` 分组导出，便于程序直接读取
 
 推荐把它暴露到一个调试接口，方便前端查看协议。
 

@@ -31,22 +31,17 @@ In short:
 - `bus` is for module/node messaging
 - `ws` is for node-to-client realtime delivery
 
-## Upgrade Endpoints
+## Upgrade and Space
 
-`http/web` no longer directly depends on `ws`.
+`http/web` now directly hands upgraded connections to `ws.Accept(...)`.
 
-They now only expose:
+Default rules:
 
-- `ctx.Upgrade(names ...string)`
-- `http.Endpoint`
-- `web.Endpoint`
+- `ctx.Upgrade()` uses `ctx.Name` as the default `space`
+- if `ctx.Name == ""`, it falls back to `infra.DEFAULT`
+- `ctx.Upgrade("custom")` explicitly selects the `custom` space
 
-The `ws` module registers its own default upgrade acceptor during startup, so:
-
-- `ctx.Upgrade()` first uses the unnamed default `Endpoint`, and falls back to the default upgrade acceptor
-- `ctx.Upgrade("custom")` explicitly selects a named endpoint
-
-This keeps the old default flow intact while allowing custom upgrade handlers.
+This design focuses on isolating websocket business scenarios inside one project, not on supporting many websocket engines at once.
 
 ## Basic Model
 
@@ -64,34 +59,9 @@ infra.Register(".socket", web.Router{
 })
 ```
 
-### Custom Endpoint
+### Custom Space
 
 ```go
-infra.Register("custom", web.Endpoint{
-    Name: "custom",
-    Desc: "custom websocket endpoint",
-    Accept: func(ctx *web.Context, socket web.Socket) error {
-        return ws.Accept(ws.AcceptOptions{
-            Conn:       socket,
-            Meta:       ctx.Meta,
-            Name:       ctx.Name,
-            Site:       ctx.Site,
-            Host:       ctx.Host,
-            Domain:     ctx.Domain,
-            RootDomain: ctx.RootDomain,
-            Path:       ctx.Path,
-            Uri:        ctx.Uri,
-            Setting:    ctx.Setting,
-            Params:     ctx.Params,
-            Query:      ctx.Query,
-            Form:       ctx.Form,
-            Value:      ctx.Value,
-            Args:       ctx.Args,
-            Locals:     ctx.Locals,
-        })
-    },
-})
-
 infra.Register(".socket.custom", web.Router{
     Uri:  "/socket/custom",
     Name: "custom socket",
@@ -161,6 +131,29 @@ Inbound compatibility:
 
 This split is clearer than treating both directions as the same event type.
 
+## Space Isolation
+
+Inside `ws`, these capabilities are isolated by `space`:
+
+- `Message / Command`
+- `Hook / Filter / Handler`
+- `Session / User / Group`
+- `Broadcast / Groupcast / PushUser`
+- cross-node `_ws.dispatch`
+
+Lookup rules:
+
+- `Message / Command / Handler`
+  look in current `space` first, then fall back to global `infra.DEFAULT`
+- `Filter / Hook`
+  run global `infra.DEFAULT` plus current `space`
+
+When you are not inside a `ctx` but still need an explicit space, use:
+
+- `ws.PushUserIn(space, uid, msg, data)`
+- `ws.BroadcastIn(space, msg, data)`
+- `ws.GroupcastIn(space, gid, msg, data)`
+
 ## Hook / Filter / Handler
 
 - `ws.Hook`
@@ -218,8 +211,6 @@ These results represent whether the message successfully entered the local send 
 [ws]
 format = "text"
 codec = "json"
-message_key = "name"
-payload_key = "data"
 ping_interval = "30s"
 read_timeout = "75s"
 write_timeout = "10s"
@@ -237,12 +228,17 @@ Key fields:
 
 - `format`: `text` / `binary`
 - `codec`: default `json`
-- `message_key` / `payload_key`
 - `ping_interval` / `read_timeout` / `write_timeout`
 - `max_message_size`
 - `queue_size` / `queue_policy`
 - `compression` / `compress_level`
 - `observe_interval` / `observe_log` / `observe_trace`
+
+Wire fields are fixed:
+
+- request: `name` + `data`
+- response: `code` + `name` + `data` + `text` + `time`
+- inbound compatibility still accepts `msg` / `args`
 
 ## Queue and Backpressure
 
@@ -274,10 +270,19 @@ Default policy behavior:
 `ws.Export()` returns a frontend-friendly document including:
 
 - config
+- export schema metadata
 - request/response envelope docs
+- a `spaces` summary view
 - `Message / Command` definitions
-- sample payloads
+- `request / response` examples for each protocol
 - built-in error code descriptions
+
+Notes:
+
+- `space` is internal isolation metadata and is not transmitted in websocket frames
+- top-level `schema.version` is intended for frontend caching, validation, and protocol viewer alignment
+- `spaces` summarizes message / command / filter / handler / hook counts per space
+- `messages / commands` are still exported grouped by `space` for direct programmatic consumption
 
 This is intended to be exposed through a debug or admin endpoint for frontend consumers.
 
